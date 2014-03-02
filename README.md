@@ -1,6 +1,6 @@
 # Aight::Rails
 
-This is a gem for https://github.com/axlwaii/jquery.aight
+This is a gemified version of https://github.com/axlwaii/jquery.aight
 
 ## Installation
 
