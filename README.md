@@ -1,6 +1,6 @@
 # Aight::Rails
 
-This is a gem for https://github.com/axlwaii/jquery.aight
+This is a gemified version of https://github.com/axlwaii/jquery.aight
 
 ## Installation
 
@@ -14,14 +14,14 @@ And then execute:
 
 You need to edit your `app/assets/javascripts/application.js`:
 
-``` javascript
+```javascript
 //= require jquery
 //= require aight
 ```
 
 And your `app/assets/stylesheets/application.css`:
 
-``` css
+```css
 /*
  *= require aight
 */
@@ -29,7 +29,8 @@ And your `app/assets/stylesheets/application.css`:
 
 ## Usage
 
-```basic html
+Basic html
+```html
 
 <ul class="image-gallery">
   <li><a href="big_picture_1.jpg"><img src="thumb_picture_1.jpg"/></a></li>
@@ -40,10 +41,9 @@ And your `app/assets/stylesheets/application.css`:
 
 ```
 
+initialize with
 ```javascript
-
 $('.image-gallery').aight();
-
 ```
 
 ## Contributing
