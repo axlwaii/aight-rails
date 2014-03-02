@@ -6,7 +6,7 @@ This is a gemified version of https://github.com/axlwaii/jquery.aight
 
 Add this line to your application's Gemfile:
 
-    gem 'aight-rails'
+    gem 'aight-rails', :git => 'git://github.com/axlwaii/aight-rails'
 
 And then execute:
 
