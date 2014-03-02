@@ -2,6 +2,8 @@
 
 This is a gemified version of https://github.com/axlwaii/jquery.aight
 
+![alt tag](http://oi62.tinypic.com/2qtx16q.jpg)
+
 ## Installation
 
 Add this line to your application's Gemfile:
