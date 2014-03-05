@@ -8,6 +8,7 @@
             index,
             firstSetup,
             $imageLinks,
+            $imageDesc,
             $backdrop,
             $wrapper,
             $container,
@@ -17,46 +18,55 @@
             createImageContainer,
             that,
             config,
-            standardTemplate;
+            standardTemplate,
+            singleImage = false;
 
         that = this;
-
-        standardTemplate =  '<div id="aight-backdrop"></div>'+
-                            '<div id="aight-wrapper">'+
-                            '<div id="aight-container">' +
-                            '<a id="aight-next" href="#">></a>'+
-                            '<a id="aight-prev" href="#"><</a>'+
-                            '<a id="aight-close" href="#">x</a>'+
-                            '<img src="" alt=""/>' +
-                            '</div>' +
-                            '</div>';
 
         config = $.extend({
             backdrop: 'aight-backdrop',
             closeButton: 'aight-close',
             imageContainer: 'aight-container',
+            imageDescription: 'aight-description',
             nextButton: 'aight-next',
+            nextCharacter: '>',
+            prevCharacter: '<',
             prevButton: 'aight-prev',
-            template: standardTemplate,
             wrapper: 'aight-wrapper'
         }, options);
 
+        standardTemplate =  '<div id="' + config.backdrop + '"></div>'+
+                            '<div id="' + config.wrapper + '">'+
+                            '<div id="' + config.imageContainer + '">' +
+                            '<a id="' + config.nextButton + '" href="#">'+ config.nextCharacter +'</a>'+
+                            '<a id="' + config.prevButton + '" href="#">' + config.prevCharacter +'</a>'+
+                            '<a id="' + config.closeButton + '" href="#">x</a>'+
+                            '<img src="" alt=""/>' +
+                            '<p id="' + config.imageDescription + '"></p>'+
+                            '</div>' +
+                            '</div>';
+
+
         bindButtons = function() {
 
-            $('#' + config.prevButton).unbind('click').click(function(e){
-                e.preventDefault();
-                index = index > 0 ? index - 1 : $imageLinks.length - 1;
-                $currentImage = $($imageLinks[index]);
-                createImageContainer($currentImage.prop('href'));
-            });
+            if(!singleImage) {
 
-            $('#' + config.nextButton).unbind('click').click(function(e){
-                e.preventDefault();
-                index = index < $imageLinks.length-1 ? index + 1 : 0;
-                $currentImage = $($imageLinks[index]);
-                createImageContainer($currentImage.prop('href'));
+                $('#' + config.prevButton).unbind('click').click(function(e){
+                    e.preventDefault();
+                    index = index > 0 ? index - 1 : $imageLinks.length - 1;
+                    $currentImage = $($imageLinks[index]);
+                    createImageContainer();
+                });
 
-            });
+                $('#' + config.nextButton).unbind('click').click(function(e){
+                    e.preventDefault();
+                    index = index < $imageLinks.length-1 ? index + 1 : 0;
+                    $currentImage = $($imageLinks[index]);
+                    createImageContainer();
+
+                });
+
+            }
 
             $('#' + config.closeButton).on('click', function(){
                 $wrapper.fadeOut('slow');
@@ -72,11 +82,18 @@
 
         firstSetup = function() {
 
-            $('body').append(config.template);
+            $('body').append(standardTemplate);
 
             $backdrop  = $('#' + config.backdrop);
             $wrapper   = $('#' + config.wrapper);
             $container = $('#' + config.imageContainer);
+            $imageDesc = $('#' + config.imageDescription);
+
+            if($imageLinks.length === 1) {
+                $('#' + config.prevButton).remove();
+                $('#' + config.nextButton).remove();
+                singleImage = true;
+            }
 
         };
 
@@ -85,25 +102,38 @@
                 e.preventDefault();
                 $currentImage = $(this);
                 index = $imageLinks.index($currentImage);
-                createImageContainer($currentImage.prop('href'));
+                createImageContainer();
             });
 
         };
 
-        createImageContainer = function(img) {
+        createImageContainer = function() {
 
             var $containerImage = $('#' + config.imageContainer + ' img'),
-                firstRun = false;
+                firstRun = false,
+                imgUrl = $currentImage.prop('href'),
+                imgDescription = $currentImage.find('img').prop('alt');
+
 
             if($containerImage.length === 0){
                 firstSetup();
-                $('#' + config.imageContainer + ' img').prop('src', img);
+                $('#' + config.imageContainer + ' img').prop('src', imgUrl);
+                $('#' + config.imageContainer + ' img').prop('alt', imgDescription);
+                $('#aight-description').text(imgDescription);
                 $wrapper.fadeIn('slow');
                 $backdrop.fadeIn(200);
                 firstRun = true;
             } else {
-                $containerImage.prop('src', img);
+                $containerImage.prop('src', imgUrl);
+                $containerImage.prop('alt', imgDescription);
+                $('#aight-description').text(imgDescription);
                 $backdrop.fadeIn(200);
+            }
+
+            if(imgDescription === ''){
+                $imageDesc.hide();
+            } else {
+                $imageDesc.show();
             }
 
             $containerImage = $('#' + config.imageContainer + ' img');
@@ -118,11 +148,11 @@
                     'margin-top': -($containerImage.height()/2)
                 },250);
 
-                if(firstRun){
-                    bindButtons();
-                }
-
             });
+
+            if(firstRun){
+                bindButtons();
+            }
 
             $wrapper.fadeIn();
         };

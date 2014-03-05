@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "aight-rails"
   spec.version       = Aight::Rails::VERSION
   spec.authors       = ["Markus Waitl"]
-  spec.email         = ["markus.waitl@absolventa.de"]
+  spec.email         = ["axlwaii@gmail.com"]
   spec.summary       = %q{Another jQuery Image Gallery Plugin}
   spec.description   = %q{This is an early version an might change.}
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "BEERWARE"
 
   spec.files         = Dir["{lib,vendor}/**/*"] + ["LICENSE.txt", "Rakefile", "Gemfile", "README.md"]
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
