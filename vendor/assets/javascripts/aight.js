@@ -6,6 +6,9 @@
 
         var init,
             index,
+            setNextGroupImage,
+            isGroupImage,
+            getGroupList,
             firstSetup,
             $imageLinks,
             $imageDesc,
@@ -26,6 +29,8 @@
         config = $.extend({
             backdrop: 'aight-backdrop',
             closeButton: 'aight-close',
+            carousel: false,
+            carouselGroup: true,
             imageContainer: 'aight-container',
             imageDescription: 'aight-description',
             nextButton: 'aight-next',
@@ -46,6 +51,48 @@
                             '</div>' +
                             '</div>';
 
+        getGroupList = function() {
+            return $currentImage.closest('ul');
+        };
+
+        isGroupImage = function() {
+
+            var list = getGroupList().find('a');
+
+            if(list.length > 1 && list.index($currentImage) >= 0) {
+                return true;
+            }
+
+            return false;
+
+        };
+
+        setNextGroupImage = function(dir) {
+
+            var groupIndex,
+                groupList;
+
+            groupList = getGroupList();
+
+            if(groupList.length > 0) {
+
+                groupList = groupList.find('a');
+                groupIndex = groupList.index($currentImage);
+
+                if(dir === 'prev') {
+                    groupIndex = groupIndex > 0 ? groupIndex - 1 : groupList.length -1;
+                } else {
+
+                    groupIndex = groupIndex < groupList.length - 1 ? groupIndex + 1 : 0;
+                }
+
+                $currentImage = $(groupList[groupIndex]);
+
+            }
+
+            return $currentImage;
+
+        };
 
         bindButtons = function() {
 
@@ -53,15 +100,27 @@
 
                 $('#' + config.prevButton).unbind('click').click(function(e){
                     e.preventDefault();
-                    index = index > 0 ? index - 1 : $imageLinks.length - 1;
-                    $currentImage = $($imageLinks[index]);
+
+                    if(config.carouselGroup){
+                        setNextGroupImage('prev');
+                    } else if (config.carousel) {
+                        index = index < $imageLinks.length-1 ? index + 1 : 0;
+                        $currentImage = $($imageLinks[index]);
+                    }
+
                     createImageContainer();
                 });
 
                 $('#' + config.nextButton).unbind('click').click(function(e){
                     e.preventDefault();
-                    index = index < $imageLinks.length-1 ? index + 1 : 0;
-                    $currentImage = $($imageLinks[index]);
+
+                    if(config.carouselGroup){
+                        setNextGroupImage('next');
+                    } else if (config.carousel) {
+                        index = index < $imageLinks.length-1 ? index + 1 : 0;
+                        $currentImage = $($imageLinks[index]);
+                    }
+
                     createImageContainer();
 
                 });
@@ -90,17 +149,33 @@
             $imageDesc = $('#' + config.imageDescription);
 
             if($imageLinks.length === 1) {
-                $('#' + config.prevButton).remove();
-                $('#' + config.nextButton).remove();
+                $('#' + config.prevButton).hide();
+                $('#' + config.nextButton).hide();
                 singleImage = true;
             }
 
         };
 
         bindEvents = function() {
+
             $imageLinks.on('click', function(e){
+
                 e.preventDefault();
+
+                var list;
+
                 $currentImage = $(this);
+
+                list = getGroupList();
+
+                if(list.length >= 1 && isGroupImage()){
+                    $('#' + config.prevButton).show();
+                    $('#' + config.nextButton).show();
+                } else {
+                    $('#' + config.prevButton).hide();
+                    $('#' + config.nextButton).hide();
+                }
+
                 index = $imageLinks.index($currentImage);
                 createImageContainer();
             });
@@ -113,7 +188,6 @@
                 firstRun = false,
                 imgUrl = $currentImage.prop('href'),
                 imgDescription = $currentImage.find('img').prop('alt');
-
 
             if($containerImage.length === 0){
                 firstSetup();
@@ -158,7 +232,7 @@
         };
 
         init = function() {
-            $imageLinks = $((that.selector + ' a'));
+            $imageLinks = $(that.selector);
             bindEvents();
         };
 

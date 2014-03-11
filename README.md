@@ -34,18 +34,18 @@ And your `app/assets/stylesheets/application.css`:
 Basic html
 ```html
 
-<ul class="image-gallery">
-  <li><a href="big_picture_1.jpg"><img src="thumb_picture_1.jpg"/></a></li>
-  <li><a href="big_picture_2.jpg"><img src="thumb_picture_1.jpg"/></a></li>
-  <li><a href="big_picture_3.jpg"><img src="thumb_picture_1.jpg"/></a></li>
-  <li><a href="big_picture_4.jpg"><img src="thumb_picture_1.jpg"/></a></li>
+<ul>
+  <li><a class="aight" href="big_picture_1.jpg"><img src="thumb_picture_1.jpg"/></a></li>
+  <li><a class="aight" href="big_picture_2.jpg"><img src="thumb_picture_1.jpg"/></a></li>
+  <li><a class="aight" href="big_picture_3.jpg"><img src="thumb_picture_1.jpg"/></a></li>
+  <li><a class="aight" href="big_picture_4.jpg"><img src="thumb_picture_1.jpg"/></a></li>
 </ul>
 
 ```
 
 initialize with
 ```javascript
-$('.image-gallery').aight();
+$('.aight').aight();
 ```
 
 ## Contributing
