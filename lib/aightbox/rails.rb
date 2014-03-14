@@ -1,6 +1,6 @@
-require "aight/rails/version"
+require "aightbox/rails/version"
 
-module Aight
+module Aightbox
   module Rails
     class Engine < ::Rails::Engine
     end

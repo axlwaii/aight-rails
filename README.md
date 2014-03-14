@@ -1,6 +1,6 @@
 # Aight::Rails
 
-This is a gemified version of https://github.com/axlwaii/jquery.aight
+This is a gemified version of https://github.com/axlwaii/jquery.aightbox
 
 ![alt tag](http://oi62.tinypic.com/2qtx16q.jpg)
 
@@ -8,7 +8,7 @@ This is a gemified version of https://github.com/axlwaii/jquery.aight
 
 Add this line to your application's Gemfile:
 
-    gem 'aight-rails', :git => 'git://github.com/axlwaii/aight-rails'
+    gem 'aightbox-rails', :git => 'git://github.com/axlwaii/aight-rails'
 
 And then execute:
 
@@ -18,14 +18,14 @@ You need to edit your `app/assets/javascripts/application.js`:
 
 ```javascript
 //= require jquery
-//= require aight
+//= require aightbox
 ```
 
 And your `app/assets/stylesheets/application.css`:
 
 ```css
 /*
- *= require aight
+ *= require aightbox
 */
 ```
 
@@ -45,7 +45,7 @@ Basic html
 
 initialize with
 ```javascript
-$('.aight').aight();
+$('.aight').aightbox();
 ```
 
 ## Contributing

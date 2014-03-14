@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'aight/rails/version'
+require 'aightbox/rails/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "aight-rails"
-  spec.version       = Aight::Rails::VERSION
+  spec.name          = "aightbox-rails"
+  spec.version       = Aightbox::Rails::VERSION
   spec.authors       = ["Markus Waitl"]
   spec.email         = ["axlwaii@gmail.com"]
   spec.summary       = %q{Another jQuery Image Gallery Plugin}
-  spec.description   = %q{This is an early version an might change.}
+  spec.description   = %q{Display single or group images.}
   spec.homepage      = ""
   spec.license       = "BEERWARE"
 
