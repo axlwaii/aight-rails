@@ -1,4 +1,4 @@
-# Aight::Rails
+# AIGHTbox::Rails
 
 This is a gemified version of https://github.com/axlwaii/jquery.aightbox
 
@@ -59,4 +59,4 @@ Go to https://github.com/axlwaii/jquery.aightbox to get more information
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-Changes will go from the jquery plugin directory dirctly to the gem version
+Changes will go from there to the gem version as soon as possible.
