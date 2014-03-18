@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["axlwaii@gmail.com"]
   spec.summary       = %q{Another jQuery Image Gallery Plugin}
   spec.description   = %q{Display single or group images.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/axlwaii/aightbox-rails"
   spec.license       = "BEERWARE"
 
   spec.files         = Dir["{lib,vendor}/**/*"] + ["LICENSE.txt", "Rakefile", "Gemfile", "README.md"]
