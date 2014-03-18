@@ -246,20 +246,20 @@
 
             }
 
-            if(imgDescription === ''){
-                $imageDesc.hide();
-            } else {
-                $imageDesc.show();
-            }
+            $imageDesc.hide();
 
             $containerImage.hide();
             $wrapper.fadeIn('slow');
-            $container.append('<div class="progress small"><div>Loading…</div></div>');
+            $container.append('<div class="aight-progress small"><div>Loading…</div></div>');
 
             $containerImage.one('load',function(){
 
-                $('.progress.small').remove();
+                $('.aight-progress.small').remove();
                 $containerImage.show();
+
+                if(imgDescription !== ''){
+                    $imageDesc.show();
+                }
 
                 $container.animate({
                     'margin-left':-($containerImage.width()/2),
