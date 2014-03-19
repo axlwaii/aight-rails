@@ -8,7 +8,7 @@ This is a gemified version of https://github.com/axlwaii/jquery.aightbox
 
 Add this line to your application's Gemfile:
 
-    gem 'aightbox-rails', :git => 'git://github.com/axlwaii/aightbox-rails'
+    gem 'aightbox-rails'
 
 And then execute:
 

@@ -16,6 +16,7 @@
             $wrapper,
             $container,
             $currentImage,
+            $spinner,
             bindEvents,
             bindControls,
             createImageContainer,
@@ -32,12 +33,14 @@
             closeButton: 'aight-close',
             carousel: false,
             carouselGroup: true,
+            closeCharacter: 'x',
             imageContainer: 'aight-container',
             imageDescription: 'aight-description',
             nextButton: 'aight-next',
             nextCharacter: '>',
             prevCharacter: '<',
             prevButton: 'aight-prev',
+            spinnerClass: 'aight-progress small',
             wrapper: 'aight-wrapper'
 
         }, options);
@@ -49,11 +52,18 @@
         template =  '<div id="' + config.backdrop + '"></div>'+
                     '<div id="' + config.wrapper + '">'+
                     '<div id="' + config.imageContainer + '">' +
-                    '<a id="' + config.nextButton + '" href="#">'+ config.nextCharacter +'</a>'+
-                    '<a id="' + config.prevButton + '" href="#">' + config.prevCharacter +'</a>'+
-                    '<a id="' + config.closeButton + '" href="#">x</a>'+
+                    '<div id="' + config.nextButton + '" >' +
+                    '<a href="#">'+ config.nextCharacter +'</a>'+
+                    '</div>' +
+                    '<div id="' + config.prevButton + '">' +
+                    '<a href="#">' + config.prevCharacter +'</a>'+
+                    '</div>' +
+                    '<div id="' + config.closeButton + '">' +
+                    '<a href="#">' + config.closeCharacter + '</a>'+
+                    '</div>' +
                     '<img src="" alt=""/>' +
                     '<p id="' + config.imageDescription + '"></p>'+
+                    '<div class="' + config.spinnerClass +'" style="display: none;"><div>Loading…</div></div>' +
                     '</div>' +
                     '</div>';
 
@@ -177,6 +187,7 @@
             $wrapper   = $('#' + config.wrapper);
             $container = $('#' + config.imageContainer);
             $imageDesc = $('#' + config.imageDescription);
+            $spinner   = $('#' + config.imageContainer + ' .' + config.spinnerClass.split(' ')[0] );
 
             if($imageLinks.length === 1) {
                 $('#' + config.prevButton).hide();
@@ -250,11 +261,11 @@
 
             $containerImage.hide();
             $wrapper.fadeIn('slow');
-            $container.append('<div class="aight-progress small"><div>Loading…</div></div>');
+            $spinner.show();
 
             $containerImage.one('load',function(){
 
-                $('.aight-progress.small').remove();
+                $spinner.hide();
                 $containerImage.show();
 
                 if(imgDescription !== ''){

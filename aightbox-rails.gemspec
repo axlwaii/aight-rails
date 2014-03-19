@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Markus Waitl"]
   spec.email         = ["axlwaii@gmail.com"]
   spec.summary       = %q{Another jQuery Image Gallery Plugin}
-  spec.description   = %q{Display single or group images.}
+  spec.description   = %q{Display single or group images in a lightbox.}
   spec.homepage      = "https://github.com/axlwaii/aightbox-rails"
   spec.license       = "BEERWARE"
 
